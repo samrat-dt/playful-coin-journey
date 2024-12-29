@@ -55,7 +55,8 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
         <div className={cn(
           "absolute inset-0 rounded-full bg-tails-gradient",
           "flex items-center justify-center backface-hidden border-4 border-gray-600",
-          "text-4xl font-bold text-white shadow-lg transform rotate-y-180"
+          "text-4xl font-bold text-white shadow-lg",
+          "transform rotateY-180"
         )}>
           TAILS
         </div>

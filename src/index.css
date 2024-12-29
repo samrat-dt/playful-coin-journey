@@ -69,3 +69,7 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+
+.rotateY-180 {
+  transform: rotateY(180deg);
+}
