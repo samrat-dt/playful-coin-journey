@@ -73,13 +73,13 @@ export const Outcome = ({ result }: OutcomeProps) => {
   }, [usedOutcomes]);
 
   useEffect(() => {
-    if (result) {
+    if (result && !currentOutcome) {
       const outcome = getUniqueRandomOutcome(result);
       setCurrentOutcome(outcome);
-    } else {
+    } else if (!result) {
       setCurrentOutcome(null);
     }
-  }, [result, getUniqueRandomOutcome]);
+  }, [result, getUniqueRandomOutcome, currentOutcome]);
 
   if (!result || !currentOutcome) return null;
 

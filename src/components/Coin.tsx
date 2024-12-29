@@ -55,10 +55,8 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
         <div className={cn(
           "absolute inset-0 rounded-full bg-gradient-to-br from-gray-700 to-gray-900",
           "flex items-center justify-center backface-hidden border-4 border-gray-600",
-          "text-4xl font-bold text-white shadow-lg"
-        )}
-          style={{ transform: "rotateY(180deg)" }}
-        >
+          "text-4xl font-bold text-white shadow-lg transform rotate-y-180"
+        )}>
           TAILS
         </div>
       </motion.div>
