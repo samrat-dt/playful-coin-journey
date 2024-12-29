@@ -22,9 +22,14 @@ const Index = () => {
           : "bg-gradient-to-br from-gray-100 to-gray-200"
       }`}
     >
-      <h1 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-        Coin Flip Extremes
-      </h1>
+      <div className="max-w-2xl mx-auto text-center">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          Coin Flip Extremes
+        </h1>
+        <p className="text-lg md:text-xl mb-12 opacity-80">
+          Elevating the classic coin flip to absurd extremes, with over-the-top consequences.
+        </p>
+      </div>
       
       <Coin onFlipComplete={handleFlipComplete} />
       <Outcome result={result} />
