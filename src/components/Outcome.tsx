@@ -6,18 +6,29 @@ interface OutcomeProps {
 
 const outcomes = {
   heads: [
-    "Compliment yourself in the mirror.",
     "Smile for 10 seconds.",
-    "Pet a dog or imagine one.",
+    "Say 'I'm proud of myself.'",
     "Drink a glass of water.",
-    "Say \"I'm proud of myself.\"",
+    "Smile for 10 seconds.",
+    "Look at a happy photo from your past.",
+    "Compliment yourself in the mirror.",
+    "Say 'I am enough.'",
+    "Stretch your arms and take a deep breath.",
+    "Pet a dog or imagine one.",
+    "Write down one thing you're grateful for.",
+    "Take a sip of your favorite drink.",
   ],
   tails: [
     "Reflect on why you avoid addressing your biggest fear.",
-    "Contemplate the last time you truly felt alive.",
-    "Question if you're living or just existing.",
     "Think about how fleeting your happiest memory is.",
+    "Question if you're living or just existing.",
+    "Think about a regret you'd erase if you could.",
+    "Consider what part of your personality you hide from others.",
+    "Contemplate the last time you truly felt alive.",
+    "Ponder why you hold onto grudges.",
     "Wonder if you've peaked already in life.",
+    "Imagine the legacy you'd leave if today were your last day.",
+    "Ask yourself what you fear losing the most.",
   ],
 };
 

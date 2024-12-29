@@ -23,10 +23,10 @@ const Index = () => {
       }`}
     >
       <div className="max-w-2xl mx-auto text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 dark:text-white">
           Coin Flip Extremes
         </h1>
-        <p className="text-lg md:text-xl mb-12 opacity-80">
+        <p className="text-lg md:text-xl mb-12 opacity-80 dark:text-white">
           Elevating the classic coin flip to absurd extremes, with over-the-top consequences.
         </p>
       </div>
