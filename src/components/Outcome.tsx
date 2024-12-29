@@ -5,7 +5,7 @@ interface OutcomeProps {
   result: "heads" | "tails" | null;
 }
 
-// Moved outcomes to a separate constant to keep component clean
+// Define outcomes as a constant
 const OUTCOMES = {
   heads: [
     "Smile for 10 seconds.",
@@ -34,37 +34,45 @@ const OUTCOMES = {
 } as const;
 
 export const Outcome = ({ result }: OutcomeProps) => {
-  const [lastOutcomes, setLastOutcomes] = useState<{
-    heads: number[];
-    tails: number[];
-  }>({ heads: [], tails: [] });
+  const [usedOutcomes, setUsedOutcomes] = useState<{
+    heads: Set<number>;
+    tails: Set<number>;
+  }>({
+    heads: new Set(),
+    tails: new Set(),
+  });
 
   const getUniqueRandomOutcome = useCallback((type: "heads" | "tails") => {
-    const options = OUTCOMES[type];
-    const usedIndices = lastOutcomes[type];
+    const outcomes = OUTCOMES[type];
+    const used = usedOutcomes[type];
     
-    // If all outcomes have been used, reset the list
-    if (usedIndices.length === options.length) {
-      setLastOutcomes(prev => ({ ...prev, [type]: [] }));
-      return options[Math.floor(Math.random() * options.length)];
+    // If all outcomes have been used, reset the set
+    if (used.size === outcomes.length) {
+      setUsedOutcomes(prev => ({
+        ...prev,
+        [type]: new Set(),
+      }));
+      return outcomes[Math.floor(Math.random() * outcomes.length)];
     }
     
     // Get a random unused index
     let randomIndex;
     do {
-      randomIndex = Math.floor(Math.random() * options.length);
-    } while (usedIndices.includes(randomIndex));
+      randomIndex = Math.floor(Math.random() * outcomes.length);
+    } while (used.has(randomIndex));
     
     // Update used indices
-    setLastOutcomes(prev => ({
+    setUsedOutcomes(prev => ({
       ...prev,
-      [type]: [...prev[type], randomIndex],
+      [type]: new Set([...prev[type], randomIndex]),
     }));
     
-    return options[randomIndex];
-  }, [lastOutcomes]);
+    return outcomes[randomIndex];
+  }, [usedOutcomes]);
 
   if (!result) return null;
+
+  const outcome = getUniqueRandomOutcome(result);
 
   return (
     <motion.div
@@ -85,9 +93,7 @@ export const Outcome = ({ result }: OutcomeProps) => {
           ? "Time for something uplifting!"
           : "Time for deep reflection..."}
       </p>
-      <p className="text-xl font-medium mt-4">
-        {getUniqueRandomOutcome(result)}
-      </p>
+      <p className="text-xl font-medium mt-4">{outcome}</p>
     </motion.div>
   );
 };

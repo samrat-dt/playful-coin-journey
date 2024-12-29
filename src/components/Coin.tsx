@@ -14,11 +14,14 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
     if (isFlipping) return;
     
     setIsFlipping(true);
-    const newRotation = rotation + 1800 + (Math.random() > 0.5 ? 180 : 0);
+    // Add randomness to number of rotations (between 5-7 full rotations)
+    const randomRotations = 5 + Math.floor(Math.random() * 3);
+    const newRotation = rotation + (randomRotations * 360) + (Math.random() > 0.5 ? 180 : 0);
     setRotation(newRotation);
     
+    // Calculate result based on final rotation
     setTimeout(() => {
-      const result = Math.round(newRotation / 180) % 2 === 0 ? "heads" : "tails";
+      const result = Math.round(newRotation / 360) % 2 === 0 ? "heads" : "tails";
       onFlipComplete(result);
       setIsFlipping(false);
     }, 2000);
@@ -28,8 +31,18 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
     <div className="flex flex-col items-center gap-8">
       <motion.div
         className="w-48 h-48 md:w-64 md:h-64 relative cursor-pointer perspective-1000"
-        animate={{ rotateY: rotation }}
-        transition={{ duration: 2, ease: [0.68, -0.55, 0.27, 1.55] }}
+        animate={{ 
+          rotateY: rotation,
+          rotateX: isFlipping ? [0, 15, -15, 10, -10, 5, -5, 0] : 0
+        }}
+        transition={{ 
+          duration: 2,
+          ease: [0.68, -0.55, 0.27, 1.55],
+          rotateX: {
+            duration: 2,
+            times: [0, 0.2, 0.4, 0.6, 0.7, 0.8, 0.9, 1]
+          }
+        }}
         onClick={flipCoin}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -63,14 +76,14 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
         onClick={flipCoin}
         disabled={isFlipping}
         className={cn(
-          "w-20 h-20 rounded-full text-white font-semibold shadow-lg",
+          "px-8 py-3 rounded-full text-white font-semibold shadow-lg",
           isFlipping ? "bg-gray-400" : "bg-gradient-to-r from-orange-400 to-pink-500",
           "disabled:opacity-50 disabled:cursor-not-allowed"
         )}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        Flip
+        {isFlipping ? "Flipping..." : "Flip Coin"}
       </motion.button>
     </div>
   );
