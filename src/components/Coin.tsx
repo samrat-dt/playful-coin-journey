@@ -44,7 +44,7 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
       >
         {/* Heads Side */}
         <div className={cn(
-          "absolute inset-0 rounded-full bg-gradient-to-br from-gray-200 to-white",
+          "absolute inset-0 rounded-full bg-heads-gradient",
           "flex items-center justify-center backface-hidden border-4 border-gray-300",
           "text-4xl font-bold text-gray-800 shadow-lg"
         )}>
@@ -53,7 +53,7 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
 
         {/* Tails Side */}
         <div className={cn(
-          "absolute inset-0 rounded-full bg-gradient-to-br from-gray-700 to-gray-900",
+          "absolute inset-0 rounded-full bg-tails-gradient",
           "flex items-center justify-center backface-hidden border-4 border-gray-600",
           "text-4xl font-bold text-white shadow-lg transform rotate-y-180"
         )}>
