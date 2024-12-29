@@ -5,31 +5,30 @@ interface OutcomeProps {
   result: "heads" | "tails" | null;
 }
 
-// Define outcomes as a constant
 const OUTCOMES = {
   heads: [
-    "Smile for 10 seconds.",
-    "Say 'I'm proud of myself.'",
-    "Drink a glass of water.",
-    "Look at a happy photo from your past.",
-    "Compliment yourself in the mirror.",
-    "Say 'I am enough.'",
-    "Stretch your arms and take a deep breath.",
-    "Pet a dog or imagine one.",
-    "Write down one thing you're grateful for.",
-    "Take a sip of your favorite drink.",
+    "Take a deep breath and smile.",
+    "Share a kind word with someone.",
+    "Dance to your favorite song.",
+    "Write down three things you're grateful for.",
+    "Give yourself a compliment.",
+    "Do a random act of kindness.",
+    "Take a moment to stretch and relax.",
+    "Call someone you care about.",
+    "Try something new today.",
+    "Make someone laugh.",
   ],
   tails: [
-    "Reflect on why you avoid addressing your biggest fear.",
-    "Think about how fleeting your happiest memory is.",
-    "Question if you're living or just existing.",
-    "Think about a regret you'd erase if you could.",
-    "Consider what part of your personality you hide from others.",
-    "Contemplate the last time you truly felt alive.",
-    "Ponder why you hold onto grudges.",
-    "Wonder if you've peaked already in life.",
-    "Imagine the legacy you'd leave if today were your last day.",
-    "Ask yourself what you fear losing the most.",
+    "Reflect on your biggest fear and why it holds you back.",
+    "Consider a time you disappointed yourself - what did you learn?",
+    "Think about the path not taken in your life.",
+    "Contemplate your legacy - what will you leave behind?",
+    "Examine a relationship you've let slip away.",
+    "Question your current life direction.",
+    "Consider what you'd do differently if you could start over.",
+    "Reflect on a moment that changed everything.",
+    "Think about what truly matters in your life.",
+    "Contemplate your deepest regret.",
   ],
 } as const;
 
@@ -48,7 +47,6 @@ export const Outcome = ({ result }: OutcomeProps) => {
     const outcomes = OUTCOMES[type];
     const used = usedOutcomes[type];
     
-    // If all outcomes have been used, reset the set
     if (used.size === outcomes.length) {
       setUsedOutcomes(prev => ({
         ...prev,
@@ -57,13 +55,11 @@ export const Outcome = ({ result }: OutcomeProps) => {
       return outcomes[Math.floor(Math.random() * outcomes.length)];
     }
     
-    // Get a random unused index
     let randomIndex;
     do {
       randomIndex = Math.floor(Math.random() * outcomes.length);
     } while (used.has(randomIndex));
     
-    // Update used indices
     setUsedOutcomes(prev => ({
       ...prev,
       [type]: new Set([...prev[type], randomIndex]),
@@ -88,21 +84,16 @@ export const Outcome = ({ result }: OutcomeProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5 }}
-      className={`mt-8 p-6 rounded-lg ${
+      className={`mt-6 p-4 rounded-lg max-w-md ${
         result === "heads"
           ? "bg-gradient-to-br from-gray-200 to-white text-gray-800"
           : "bg-gradient-to-br from-gray-700 to-gray-900 text-white"
       }`}
     >
-      <h2 className="text-4xl md:text-5xl font-bold mb-2">
-        {result.toUpperCase()}
+      <h2 className="text-2xl md:text-3xl font-bold mb-2">
+        {result === "heads" ? "Time for joy!" : "Time for reflection..."}
       </h2>
-      <p className="text-lg opacity-80 mb-4">
-        {result === "heads"
-          ? "Time for something uplifting!"
-          : "Time for deep reflection..."}
-      </p>
-      <p className="text-xl font-medium mt-4">{currentOutcome}</p>
+      <p className="text-lg opacity-90">{currentOutcome}</p>
     </motion.div>
   );
 };

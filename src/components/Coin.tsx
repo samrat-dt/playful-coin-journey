@@ -14,12 +14,10 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
     if (isFlipping) return;
     
     setIsFlipping(true);
-    // Random number of rotations (between 5-7 full rotations)
     const randomRotations = 5 + Math.floor(Math.random() * 3);
     const newRotation = rotation + (randomRotations * 360) + (Math.random() > 0.5 ? 180 : 0);
     setRotation(newRotation);
     
-    // Calculate result based on final rotation
     setTimeout(() => {
       const result = Math.round(newRotation / 360) % 2 === 0 ? "heads" : "tails";
       onFlipComplete(result);
@@ -30,7 +28,7 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
   return (
     <div className="flex flex-col items-center gap-8">
       <motion.div
-        className="w-48 h-48 md:w-64 md:h-64 relative cursor-pointer perspective-1000"
+        className="w-32 h-32 md:w-48 md:h-48 relative cursor-pointer perspective-1000"
         animate={{ 
           rotateY: rotation,
         }}
@@ -46,7 +44,7 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
         <div className={cn(
           "absolute inset-0 rounded-full bg-heads-gradient",
           "flex items-center justify-center backface-hidden border-4 border-gray-300",
-          "text-4xl font-bold text-gray-800 shadow-lg"
+          "text-3xl font-bold text-gray-800 shadow-lg"
         )}>
           HEADS
         </div>
@@ -55,7 +53,7 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
         <div className={cn(
           "absolute inset-0 rounded-full bg-tails-gradient",
           "flex items-center justify-center backface-hidden border-4 border-gray-600",
-          "text-4xl font-bold text-white shadow-lg",
+          "text-3xl font-bold text-white shadow-lg",
           "transform rotateY-180"
         )}>
           TAILS
@@ -66,7 +64,7 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
         onClick={flipCoin}
         disabled={isFlipping}
         className={cn(
-          "px-8 py-3 rounded-full text-white font-semibold shadow-lg",
+          "px-6 py-2 rounded-full text-white font-semibold shadow-lg",
           "bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-gray-950",
           "disabled:opacity-50 disabled:cursor-not-allowed"
         )}
