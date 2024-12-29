@@ -14,7 +14,7 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
     if (isFlipping) return;
     
     setIsFlipping(true);
-    // Add randomness to number of rotations (between 5-7 full rotations)
+    // Random number of rotations (between 5-7 full rotations)
     const randomRotations = 5 + Math.floor(Math.random() * 3);
     const newRotation = rotation + (randomRotations * 360) + (Math.random() > 0.5 ? 180 : 0);
     setRotation(newRotation);
@@ -33,15 +33,10 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
         className="w-48 h-48 md:w-64 md:h-64 relative cursor-pointer perspective-1000"
         animate={{ 
           rotateY: rotation,
-          rotateX: isFlipping ? [0, 15, -15, 10, -10, 5, -5, 0] : 0
         }}
         transition={{ 
           duration: 2,
-          ease: [0.68, -0.55, 0.27, 1.55],
-          rotateX: {
-            duration: 2,
-            times: [0, 0.2, 0.4, 0.6, 0.7, 0.8, 0.9, 1]
-          }
+          ease: [0.68, -0.55, 0.27, 1.55]
         }}
         onClick={flipCoin}
         whileHover={{ scale: 1.05 }}
@@ -49,26 +44,22 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
       >
         {/* Heads Side */}
         <div className={cn(
-          "absolute inset-0 rounded-full bg-heads-gradient flex items-center justify-center backface-hidden",
-          "text-3xl font-bold shadow-lg transition-transform duration-500"
+          "absolute inset-0 rounded-full bg-gradient-to-br from-gray-200 to-white",
+          "flex items-center justify-center backface-hidden border-4 border-gray-300",
+          "text-4xl font-bold text-gray-800 shadow-lg"
         )}>
-          <div className="flex flex-col items-center">
-            <span className="text-4xl">HEADS</span>
-            <div className="w-12 h-12 border-4 border-black rounded-full mt-2" />
-          </div>
+          HEADS
         </div>
 
         {/* Tails Side */}
         <div className={cn(
-          "absolute inset-0 rounded-full bg-tails-gradient flex items-center justify-center backface-hidden",
-          "text-3xl font-bold shadow-lg text-white transition-transform duration-500"
+          "absolute inset-0 rounded-full bg-gradient-to-br from-gray-700 to-gray-900",
+          "flex items-center justify-center backface-hidden border-4 border-gray-600",
+          "text-4xl font-bold text-white shadow-lg"
         )}
           style={{ transform: "rotateY(180deg)" }}
         >
-          <div className="flex flex-col items-center">
-            <span className="text-4xl">TAILS</span>
-            <div className="w-12 h-12 border-4 border-white rounded-full mt-2" />
-          </div>
+          TAILS
         </div>
       </motion.div>
       
@@ -77,7 +68,7 @@ export const Coin = ({ onFlipComplete }: CoinProps) => {
         disabled={isFlipping}
         className={cn(
           "px-8 py-3 rounded-full text-white font-semibold shadow-lg",
-          isFlipping ? "bg-gray-400" : "bg-gradient-to-r from-orange-400 to-pink-500",
+          "bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-gray-950",
           "disabled:opacity-50 disabled:cursor-not-allowed"
         )}
         whileHover={{ scale: 1.05 }}

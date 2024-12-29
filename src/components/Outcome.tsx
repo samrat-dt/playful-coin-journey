@@ -81,8 +81,8 @@ export const Outcome = ({ result }: OutcomeProps) => {
       transition={{ delay: 0.5 }}
       className={`mt-8 p-6 rounded-lg ${
         result === "heads"
-          ? "bg-heads-gradient text-gray-800"
-          : "bg-tails-gradient text-white"
+          ? "bg-gradient-to-br from-gray-200 to-white text-gray-800"
+          : "bg-gradient-to-br from-gray-700 to-gray-900 text-white"
       }`}
     >
       <h2 className="text-4xl md:text-5xl font-bold mb-2">
