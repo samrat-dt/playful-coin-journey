@@ -1,69 +1,69 @@
-# Welcome to your Lovable project
+# Coin Flip Extremes
 
-## Project info
+A unique web application that transforms the classic coin flip into an engaging experience with meaningful outcomes.
 
-**URL**: https://lovable.dev/projects/1780a2a8-4bf1-43b3-a5bb-135ba44fe834
+## Features
+- Interactive 3D coin flipping animation
+- Dynamic outcomes based on flip results
+- Responsive design for all devices
+- No tracking or data collection
 
-## How can I edit this code?
+## Tech Stack
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- ShadcnUI
 
-There are several ways of editing your application.
+## Local Development
 
-**Use Lovable**
+1. Clone the repository
+```bash
+git clone <your-repo-url>
+cd coin-flip-extremes
+```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/1780a2a8-4bf1-43b3-a5bb-135ba44fe834) and start prompting.
+2. Install dependencies
+```bash
+npm install
+```
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start development server
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Vercel
+1. Fork this repository
+2. Import to Vercel
+3. Deploy with default settings
 
-**Use GitHub Codespaces**
+### Netlify
+1. Fork this repository
+2. Connect to Netlify
+3. Deploy with build command: `npm run build`
+4. Set publish directory to: `dist`
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### AWS/GCP
+1. Build the project: `npm run build`
+2. Deploy the `dist` folder to your chosen static hosting service:
+   - AWS S3 + CloudFront
+   - Google Cloud Storage + Cloud CDN
 
-## What technologies are used for this project?
+## Testing
+Run tests with:
+```bash
+npm test
+```
 
-This project is built with .
+## Security
+- No sensitive data collection
+- All computations done client-side
+- No external API dependencies
+- Content Security Policy implemented
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/1780a2a8-4bf1-43b3-a5bb-135ba44fe834) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+## License
+MIT License - Feel free to use and modify for your needs.

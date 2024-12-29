@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
+import { useState, useCallback } from "react";
 
 interface OutcomeProps {
   result: "heads" | "tails" | null;
 }
 
-const outcomes = {
+// Moved outcomes to a separate constant to keep component clean
+const OUTCOMES = {
   heads: [
     "Smile for 10 seconds.",
     "Say 'I'm proud of myself.'",
     "Drink a glass of water.",
-    "Smile for 10 seconds.",
     "Look at a happy photo from your past.",
     "Compliment yourself in the mirror.",
     "Say 'I am enough.'",
@@ -30,15 +31,40 @@ const outcomes = {
     "Imagine the legacy you'd leave if today were your last day.",
     "Ask yourself what you fear losing the most.",
   ],
-};
+} as const;
 
 export const Outcome = ({ result }: OutcomeProps) => {
-  if (!result) return null;
+  const [lastOutcomes, setLastOutcomes] = useState<{
+    heads: number[];
+    tails: number[];
+  }>({ heads: [], tails: [] });
 
-  const getRandomOutcome = (type: "heads" | "tails") => {
-    const options = outcomes[type];
-    return options[Math.floor(Math.random() * options.length)];
-  };
+  const getUniqueRandomOutcome = useCallback((type: "heads" | "tails") => {
+    const options = OUTCOMES[type];
+    const usedIndices = lastOutcomes[type];
+    
+    // If all outcomes have been used, reset the list
+    if (usedIndices.length === options.length) {
+      setLastOutcomes(prev => ({ ...prev, [type]: [] }));
+      return options[Math.floor(Math.random() * options.length)];
+    }
+    
+    // Get a random unused index
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * options.length);
+    } while (usedIndices.includes(randomIndex));
+    
+    // Update used indices
+    setLastOutcomes(prev => ({
+      ...prev,
+      [type]: [...prev[type], randomIndex],
+    }));
+    
+    return options[randomIndex];
+  }, [lastOutcomes]);
+
+  if (!result) return null;
 
   return (
     <motion.div
@@ -52,7 +78,7 @@ export const Outcome = ({ result }: OutcomeProps) => {
       }`}
     >
       <h2 className="text-4xl md:text-5xl font-bold mb-2">
-        {result.toUpperCase()}!
+        {result.toUpperCase()}
       </h2>
       <p className="text-lg opacity-80 mb-4">
         {result === "heads"
@@ -60,7 +86,7 @@ export const Outcome = ({ result }: OutcomeProps) => {
           : "Time for deep reflection..."}
       </p>
       <p className="text-xl font-medium mt-4">
-        {getRandomOutcome(result)}
+        {getUniqueRandomOutcome(result)}
       </p>
     </motion.div>
   );
