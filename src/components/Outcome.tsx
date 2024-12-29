@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 interface OutcomeProps {
   result: "heads" | "tails" | null;
@@ -42,6 +42,8 @@ export const Outcome = ({ result }: OutcomeProps) => {
     tails: new Set(),
   });
 
+  const [currentOutcome, setCurrentOutcome] = useState<string | null>(null);
+
   const getUniqueRandomOutcome = useCallback((type: "heads" | "tails") => {
     const outcomes = OUTCOMES[type];
     const used = usedOutcomes[type];
@@ -70,9 +72,16 @@ export const Outcome = ({ result }: OutcomeProps) => {
     return outcomes[randomIndex];
   }, [usedOutcomes]);
 
-  if (!result) return null;
+  useEffect(() => {
+    if (result) {
+      const outcome = getUniqueRandomOutcome(result);
+      setCurrentOutcome(outcome);
+    } else {
+      setCurrentOutcome(null);
+    }
+  }, [result, getUniqueRandomOutcome]);
 
-  const outcome = getUniqueRandomOutcome(result);
+  if (!result || !currentOutcome) return null;
 
   return (
     <motion.div
@@ -93,7 +102,7 @@ export const Outcome = ({ result }: OutcomeProps) => {
           ? "Time for something uplifting!"
           : "Time for deep reflection..."}
       </p>
-      <p className="text-xl font-medium mt-4">{outcome}</p>
+      <p className="text-xl font-medium mt-4">{currentOutcome}</p>
     </motion.div>
   );
 };
