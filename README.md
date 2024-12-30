@@ -2,6 +2,8 @@
 
 A unique web application that transforms the classic coin flip into an engaging experience with meaningful outcomes.
 
+https://playful-coin-journey.lovable.app
+
 ## Features
 - Interactive 3D coin flipping animation
 - Dynamic outcomes based on flip results
